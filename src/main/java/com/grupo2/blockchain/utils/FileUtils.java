@@ -3,6 +3,7 @@ package com.grupo2.blockchain.utils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
@@ -13,9 +14,9 @@ public class FileUtils {
 	private static final String BASE_PATH = "/blockChain";
 	private static String path;
 
-	public static void checkPath() {
+	public static void checkPath() throws UnsupportedEncodingException {
 		path = new JFileChooser().getFileSystemView().getDefaultDirectory().toString() + BASE_PATH;
-		path = URLDecoder.decode(path, StandardCharsets.UTF_8);
+		path = URLDecoder.decode(path, StandardCharsets.UTF_8.toString());
 		
 		File fi = new File(path);
 		if(!fi.exists()) {
@@ -23,9 +24,9 @@ public class FileUtils {
 		}
 	}
 	
-	public static void checkFile(String filename) {
+	public static void checkFile(String filename) throws UnsupportedEncodingException {
 		checkPath();
-		String decodedPath = URLDecoder.decode(path + filename, StandardCharsets.UTF_8);
+		String decodedPath = URLDecoder.decode(path + filename, StandardCharsets.UTF_8.toString());
 		File fi = new File(decodedPath);
 		
 		if(!fi.exists()) {

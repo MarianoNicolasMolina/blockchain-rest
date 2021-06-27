@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -16,13 +17,17 @@ public class BlockRepository<T> {
 	private static final String FILENAME = "/blockChain.json";
 	public static final String GENESIS_HASH = "0";
 
-	public static Block<?> getByHash(String hash) {
+	public static Block<?> getByHash(String hash) throws UnsupportedEncodingException {
 		List<Block<?>> blocks = getAll();
-		
-		return blocks != null ? blocks.get(0) : null;
+		for(Block<?> block : blocks){
+            if(block.getHash().equals(hash))
+                return block;
+        }
+
+        return null;
 	}
 	
-	public static List<Block<?>> getAll() {
+	public static List<Block<?>> getAll() throws UnsupportedEncodingException {
 		FileUtils.checkFile(FILENAME);
 		ObjectMapper mapper = new ObjectMapper();
 		TypeReference<List<Block<?>>> typeReference = new TypeReference<List<Block<?>>>(){};
@@ -38,7 +43,7 @@ public class BlockRepository<T> {
 		return null;
 	}
 
-	public static void save(List<Block<?>> blockChain) {
+	public static void save(List<Block<?>> blockChain) throws UnsupportedEncodingException {
 		FileUtils.checkFile(FILENAME);
 		ObjectMapper mapper = new ObjectMapper();
 		BufferedWriter out;
