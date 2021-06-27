@@ -10,22 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.blockchain.service.IBlockService;
 import com.grupo2.blockchain.structure.Block;
-import com.grupo2.blockchain.transactions.Transaction;
 
 @RestController
 @RequestMapping("/blocks")
 public class BlockController {
 
 	@Autowired
-	private IBlockService<Transaction> blockService;
+	private IBlockService blockService;
 	
 	@GetMapping("{id}")
-	public Block<?> get(@PathVariable("id") int id) {
+	public Block get(@PathVariable("id") int id) {
 		return blockService.getById(id);
 	}
 	
 	@GetMapping
-	public List<Block<?>> getAll() {
+	public List<Block> getAll() {
 		return blockService.getAll();
 	}
 }

@@ -2,16 +2,18 @@ package com.grupo2.blockchain.structure;
 
 import java.util.Date;
 
-public class Block<T> {
+import com.grupo2.blockchain.transactions.Transaction;
+
+public class Block {
     private String hash;
     private String prevHash;
     private long timeStamp;
 
-    private T data;
+    private Transaction data;
 
     public Block(){}
 
-    public Block(final String prevHash, final T data){
+    public Block(final String prevHash, final Transaction data){
         this.prevHash = prevHash;
         this.data = data;
         Date today = new Date();
@@ -36,11 +38,11 @@ public class Block<T> {
         this.prevHash = prevHash;
     }
 
-    public T getData() {
+    public Transaction getData() {
         return data;
     }
 
-    public void setData(final T data) {
+    public void setData(final Transaction data) {
         this.data = data;
         this.hash = Hasher.hashSHA256Hex(getPrevHash() + data.toString() + getTimeStamp());
     }

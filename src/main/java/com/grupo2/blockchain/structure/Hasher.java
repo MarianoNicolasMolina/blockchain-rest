@@ -33,9 +33,9 @@ public class Hasher {
      * @param blockChain: Cadena a validar
      * @return true en caso de válida y falso en caso de errónea
      */
-    public static  boolean isValidChain(List<Block<?>> blockChain){
-        Block<?> current;
-        Block<?> previous;
+    public static  boolean isValidChain(List<Block> blockChain){
+        Block current;
+        Block previous;
 
         for (int i = 1; i < blockChain.size(); i++) {
             current = blockChain.get(i);

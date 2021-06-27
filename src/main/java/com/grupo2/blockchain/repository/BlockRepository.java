@@ -14,18 +14,18 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo2.blockchain.structure.Block;
 
-public class BlockRepository<T> {
+public class BlockRepository {
 	
 	private static String FILENAME = "/blocks.json"; 
 	private static String path;
 	
-	public static Block<?> getBlock(Integer id) {
+	public static Block getBlock(Integer id) {
 		getPath();
 		ObjectMapper mapper = new ObjectMapper();
-		TypeReference<Block<?>> typeReference = new TypeReference<Block<?>>(){};
+		TypeReference<Block> typeReference = new TypeReference<Block>(){};
 		try {
 			InputStream is = new FileInputStream(new File(path));
-			Block<?> b = mapper.readValue(is,typeReference);
+			Block b = mapper.readValue(is,typeReference);
 			return b;
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -34,14 +34,14 @@ public class BlockRepository<T> {
 		return null;
 	}
 	
-	public static List<Block<?>> getAll() {
+	public static List<Block> getAll() {
 		getPath();
 		ObjectMapper mapper = new ObjectMapper();
-		TypeReference<List<Block<?>>> typeReference = new TypeReference<List<Block<?>>>(){};
+		TypeReference<List<Block>> typeReference = new TypeReference<List<Block>>(){};
 		
 		try {
 			InputStream is = new FileInputStream(new File(path));
-			List<Block<?>> b = mapper.readValue(is,typeReference);
+			List<Block> b = mapper.readValue(is,typeReference);
 			return b;
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -50,8 +50,8 @@ public class BlockRepository<T> {
 		return null;
 	}
 
-	public static void save(Block<?> block) {
-		List<Block<?>> blocks = getAll();
+	public static void save(Block block) {
+		List<Block> blocks = getAll();
 		
 		blocks.add(block);
 	}

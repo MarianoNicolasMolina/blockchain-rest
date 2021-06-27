@@ -8,20 +8,20 @@ import com.grupo2.blockchain.repository.BlockRepository;
 import com.grupo2.blockchain.structure.Block;
 
 @Service
-public class BlockService<T> implements IBlockService<T> {
+public class BlockService implements IBlockService {
 
 	@Override
-	public List<Block<?>> getAll() {
+	public List<Block> getAll() {
 		return BlockRepository.getAll();
 	}
 
 	@Override
-	public Block<?> getById(Integer id) {
+	public Block getById(Integer id) {
 		return BlockRepository.getBlock(id);
 	}
 
 	@Override
-	public void save(Block<T> block) {
+	public void save(Block block) {
 		BlockRepository.save(block);
 	}
 

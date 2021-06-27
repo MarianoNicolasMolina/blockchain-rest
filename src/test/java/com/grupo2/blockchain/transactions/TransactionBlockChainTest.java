@@ -12,17 +12,17 @@ import java.util.List;
 
 @SpringBootTest
 public class TransactionBlockChainTest {
-    private List<Block<?>> blockChain;
+    private List<Block> blockChain;
 
     @BeforeEach
     public void initBlockChain(){
         blockChain = new ArrayList<>();
-        blockChain.add(new Block<>("0", new Transaction("Messi", "Maradona", 300D)));
-        blockChain.add(new Block<>(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Maradona", "Messi", 300D)));
-        blockChain.add(new Block<>(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Messi", "Pelé", 300D)));
-        blockChain.add(new Block<>(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Pelé", "Ronaldinho", 300D)));
-        blockChain.add(new Block<>(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Ronaldinho", "Ronaldo", 300D)));
-        blockChain.add(new Block<>(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Ronaldo", "Agüero", 300D)));
+        blockChain.add(new Block("0", new Transaction("Messi", "Maradona", 300D)));
+        blockChain.add(new Block(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Maradona", "Messi", 300D)));
+        blockChain.add(new Block(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Messi", "Pelé", 300D)));
+        blockChain.add(new Block(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Pelé", "Ronaldinho", 300D)));
+        blockChain.add(new Block(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Ronaldinho", "Ronaldo", 300D)));
+        blockChain.add(new Block(blockChain.get(blockChain.size() - 1).getHash(), new Transaction("Ronaldo", "Agüero", 300D)));
     }
     @Test
     public void testValidTransactionBlockChain(){
@@ -31,7 +31,7 @@ public class TransactionBlockChainTest {
 
     @Test
     public void testInvalidTransactionBlockChain(){
-        Block<Transaction> interceptedBlock = (Block<Transaction>) blockChain.get(2);
+        Block interceptedBlock = blockChain.get(2);
 
         interceptedBlock.setData(new Transaction("Maradona", "Messi", 300D));
 
