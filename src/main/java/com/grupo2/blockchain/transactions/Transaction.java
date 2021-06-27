@@ -1,7 +1,5 @@
 package com.grupo2.blockchain.transactions;
 
-import java.lang.annotation.Documented;
-
 public class Transaction {
     private String transmitter;
     private String receiver;

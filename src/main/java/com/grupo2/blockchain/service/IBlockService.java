@@ -6,7 +6,7 @@ import com.grupo2.blockchain.structure.Block;
 
 public interface IBlockService<T> {
 
-	List<Block<T>> getAll();
+	List<Block<?>> getAll();
 	Block<?> getById(Integer id);
 	void save(Block<T> block);
 	Integer getNewId();
