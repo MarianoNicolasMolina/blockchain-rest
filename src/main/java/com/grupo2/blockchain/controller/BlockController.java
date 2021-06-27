@@ -21,9 +21,9 @@ public class BlockController {
 	@Autowired
 	private IBlockService<Transaction> blockService;
 	
-	@GetMapping("{id}")
-	public Block<?> get(@PathVariable("id") int id) {
-		return blockService.getById(id);
+	@GetMapping("{hash}")
+	public Block<?> get(@PathVariable("id") String hash) {
+		return blockService.getByHash(hash);
 	}
 	
 	@GetMapping

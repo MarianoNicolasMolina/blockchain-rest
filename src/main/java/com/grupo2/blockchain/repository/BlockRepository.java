@@ -16,7 +16,7 @@ public class BlockRepository<T> {
 	private static final String FILENAME = "/blockChain.json";
 	public static final String GENESIS_HASH = "0";
 
-	public static Block<?> getBlock(Integer id) {
+	public static Block<?> getByHash(String hash) {
 		List<Block<?>> blocks = getAll();
 		
 		return blocks != null ? blocks.get(0) : null;

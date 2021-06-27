@@ -18,8 +18,8 @@ public class BlockService<T> implements IBlockService<T> {
 	}
 
 	@Override
-	public Block<?> getById(Integer id) {
-		return BlockRepository.getBlock(id);
+	public Block<?> getByHash(String hash) {
+		return BlockRepository.getByHash(hash);
 	}
 
 	@Override
