@@ -24,6 +24,6 @@ public class MerkleBlockService implements IMerkleBlockService{
 
     @Override
     public void save(MerkleBlock<HasheableTransaction> block) throws IOException {
-        MerkleBlockRepository.save(block);
+        //MerkleBlockRepository.save(block);
     }
 }

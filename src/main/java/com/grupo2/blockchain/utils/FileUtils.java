@@ -38,11 +38,11 @@ public class FileUtils {
 		}
 	}
 	
-	public static File getFile(String filename) {
-		return new File(URLDecoder.decode(path + filename, StandardCharsets.UTF_8));
+	public static File getFile(String filename) throws UnsupportedEncodingException {
+		return new File(URLDecoder.decode(path + filename, StandardCharsets.UTF_8.toString()));
 	}
 	
 	public static FileWriter getFileWriter(String filename) throws IOException {
-		return new FileWriter(URLDecoder.decode(path + filename, StandardCharsets.UTF_8));
+		return new FileWriter(URLDecoder.decode(path + filename, StandardCharsets.UTF_8.toString()));
 	}
 }
