@@ -1,5 +1,7 @@
 package com.grupo2.blockchain.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +19,13 @@ public class BlockController {
 	@Autowired
 	private IBlockService<Transaction> blockService;
 	
-	@GetMapping("/get/{id}")
+	@GetMapping("{id}")
 	public Block<?> get(@PathVariable("id") int id) {
 		return blockService.getById(id);
+	}
+	
+	@GetMapping
+	public List<Block<?>> getAll() {
+		return blockService.getAll();
 	}
 }

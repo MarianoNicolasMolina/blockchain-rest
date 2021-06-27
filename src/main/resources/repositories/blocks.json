@@ -2,5 +2,9 @@
 	"hash":"test",
 	"prevHash":"testPrev",
 	"timeStamp" : 160000,
-	"data" : ""
+	"data" : {
+		"transmitter":"PruebaT",
+		"receiver":"PruebaR",
+		"mount":100.0
+	}
 }

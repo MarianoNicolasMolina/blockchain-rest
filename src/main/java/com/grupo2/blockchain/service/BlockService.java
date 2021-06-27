@@ -11,9 +11,8 @@ import com.grupo2.blockchain.structure.Block;
 public class BlockService<T> implements IBlockService<T> {
 
 	@Override
-	public List<Block<T>> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Block<?>> getAll() {
+		return BlockRepository.getAll();
 	}
 
 	@Override
@@ -23,8 +22,7 @@ public class BlockService<T> implements IBlockService<T> {
 
 	@Override
 	public void save(Block<T> block) {
-		// TODO Auto-generated method stub
-		
+		BlockRepository.save(block);
 	}
 
 	@Override
