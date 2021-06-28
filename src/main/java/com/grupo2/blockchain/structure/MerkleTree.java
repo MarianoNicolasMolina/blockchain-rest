@@ -16,6 +16,8 @@ public class MerkleTree<T extends Hasheable> implements Hasheable{
 
     private List<String> tree;
     private List<T> dataList;
+    
+    public MerkleTree() {}
 
     public MerkleTree(List<T> dataList) {
         this.dataList = dataList;

@@ -30,6 +30,13 @@ public class MerkleBlockController {
         return new ResponseEntity(merkleBlock,HttpStatus.OK);
     }
     
+    @GetMapping
+    public ResponseEntity getAll() throws IOException {
+        List<MerkleBlock<HasheableTransaction>> merkleBlockChain = merkleBlockService.getAll();
+
+        return new ResponseEntity(merkleBlockChain, HttpStatus.OK);
+    }
+    
     @GetMapping("/transaction")
     public ResponseEntity getPendingTransactions() throws IOException {
         List<HasheableTransaction> merkleBlock = merkleBlockService.getPendingTransactions();
