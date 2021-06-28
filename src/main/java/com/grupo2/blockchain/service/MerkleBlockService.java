@@ -1,15 +1,19 @@
 package com.grupo2.blockchain.service;
 
+import com.grupo2.blockchain.repository.BlockRepository;
 import com.grupo2.blockchain.repository.MerkleBlockRepository;
+import com.grupo2.blockchain.structure.Hasher;
 import com.grupo2.blockchain.structure.MerkleBlock;
+import com.grupo2.blockchain.structure.MerkleTree;
 import com.grupo2.blockchain.transactions.HasheableTransaction;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MerkleBlockService implements IMerkleBlockService{
+public class MerkleBlockService implements IMerkleBlockService {
 
 
     @Override
@@ -23,7 +27,52 @@ public class MerkleBlockService implements IMerkleBlockService{
     }
 
     @Override
+	public List<HasheableTransaction> getPendingTransactions() throws IOException {
+		return MerkleBlockRepository.getPendingTransactions();
+	}
+
+    @Override
     public void save(MerkleBlock<HasheableTransaction> block) throws IOException {
         //MerkleBlockRepository.save(block);
     }
+
+    @Override
+	public void save(HasheableTransaction transaction) throws IOException {
+    	
+    	//Calculamos el hash de la transacción
+    	transaction.recalculateTimeStampAndHash();
+    	
+    	//Obtenemos las transacciones pendientes
+		List<HasheableTransaction> pendingTransactions = MerkleBlockRepository.getPendingTransactions();
+		
+		if(pendingTransactions == null)
+			pendingTransactions = new ArrayList<HasheableTransaction>();
+		
+		pendingTransactions.add(transaction);
+		
+		//Si llegamos a la cantidad necesaria para armar un bloque, lo armamos
+		if(pendingTransactions.size() == MerkleTree.TRANSACTION_LIMIT) {
+			List<MerkleBlock<HasheableTransaction>> merkleBlockChain = getAll();
+			MerkleBlock<HasheableTransaction> newBlock;
+			
+			if(merkleBlockChain != null) {
+				MerkleBlock<?> lastBlock = merkleBlockChain.get(merkleBlockChain.size() - 1);
+				newBlock = new MerkleBlock<HasheableTransaction>(lastBlock.getHash(), pendingTransactions);
+			} else {
+				newBlock = new MerkleBlock<HasheableTransaction>(BlockRepository.GENESIS_HASH, pendingTransactions);
+				merkleBlockChain = new ArrayList<>();
+			}
+			
+			//Validamos la cadena antes de guardar
+			if(Hasher.isValidMerkleChain(merkleBlockChain)) {
+				merkleBlockChain.add(newBlock);
+				MerkleBlockRepository.save(merkleBlockChain);
+				
+				//Limpiamos las transacciones pendientes, ya que se agregaron a la cadena
+				pendingTransactions.clear();
+			}
+		}
+		
+		MerkleBlockRepository.savePendingTransactions(pendingTransactions);
+	}
 }

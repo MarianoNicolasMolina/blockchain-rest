@@ -1,6 +1,5 @@
 package com.grupo2.blockchain.transactions;
 
-import com.grupo2.blockchain.structure.Block;
 import com.grupo2.blockchain.structure.Hasher;
 import com.grupo2.blockchain.structure.MerkleBlock;
 import com.grupo2.blockchain.structure.MerkleTree;
@@ -15,7 +14,7 @@ import java.util.List;
 @SpringBootTest
 public class TransactionMerkleBlockChainTest {
 
-    private List<MerkleBlock<?>> merkleBlockChain;
+    private List<MerkleBlock<HasheableTransaction>> merkleBlockChain;
 
     @BeforeEach
     public void init(){

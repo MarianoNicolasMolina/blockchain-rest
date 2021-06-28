@@ -10,5 +10,7 @@ public interface IMerkleBlockService {
     List<MerkleBlock<HasheableTransaction>> getAll() throws IOException;
     MerkleBlock<HasheableTransaction> getByHash(String hash) throws IOException;
     void save(MerkleBlock<HasheableTransaction> block) throws IOException;
+	void save(HasheableTransaction transaction) throws IOException;
+	List<HasheableTransaction> getPendingTransactions() throws IOException;
 
 }

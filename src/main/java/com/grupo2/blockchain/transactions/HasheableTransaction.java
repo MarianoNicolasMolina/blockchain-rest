@@ -64,4 +64,12 @@ public class HasheableTransaction implements Hasheable{
     public String recalculateHash() {
         return Hasher.hashSHA256Hex(transmitter + receiver + mount + timeStamp);
     }
+
+	public void recalculateTimeStampAndHash() {
+		if(this.timeStamp == 0) {
+	        Date today = new Date();
+	        this.timeStamp = today.getTime();
+		}
+        this.hash = recalculateHash();
+	}
 }

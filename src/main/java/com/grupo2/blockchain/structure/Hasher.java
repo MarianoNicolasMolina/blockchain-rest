@@ -5,6 +5,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import com.grupo2.blockchain.transactions.HasheableTransaction;
+
 public class Hasher {
     /**
      * Método para hacer un hash en SHA-256 de una cadena
@@ -60,7 +62,7 @@ public class Hasher {
      * @param blockChain: Cadena Merkle a validar
      * @return true en caso de válida y falso en caso de errónea
      */
-    public static boolean isValidMerkleChain(List<MerkleBlock<?>> blockChain){
+    public static boolean isValidMerkleChain(List<MerkleBlock<HasheableTransaction>> blockChain){
         MerkleBlock<?> current;
         MerkleBlock<?> previous;
 

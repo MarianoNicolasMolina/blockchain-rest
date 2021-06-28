@@ -33,7 +33,7 @@ public class MerkleTree<T extends Hasheable> implements Hasheable{
         tree.add(Hasher.hashSHA256Hex(tree.get(HASH_POSITION_AB) + tree.get(HASH_POSITION_CD)));
     }
 
-    @Override
+	@Override
     public String getHash() {
         return tree.get(HASH_POSITION_ABCD);
     }

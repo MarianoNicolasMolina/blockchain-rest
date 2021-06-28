@@ -23,6 +23,10 @@ public class MerkleBlock<T extends Hasheable> implements Hasheable {
     public String recalculateHash() {
         return merkleTree.recalculateHash();
     }
+    
+    public void setPrevHash(final String prevHash) {
+        this.prevHash = prevHash;
+    }
 
     public String getPrevHash() {
         return prevHash;
