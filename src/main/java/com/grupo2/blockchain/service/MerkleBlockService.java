@@ -1,5 +1,6 @@
 package com.grupo2.blockchain.service;
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.grupo2.blockchain.repository.BlockRepository;
 import com.grupo2.blockchain.repository.MerkleBlockRepository;
 import com.grupo2.blockchain.structure.Hasher;
@@ -52,12 +53,21 @@ public class MerkleBlockService implements IMerkleBlockService {
 		
 		//Si llegamos a la cantidad necesaria para armar un bloque, lo armamos
 		if(pendingTransactions.size() == MerkleTree.TRANSACTION_LIMIT) {
-			List<MerkleBlock<HasheableTransaction>> merkleBlockChain = getAll();
+			
+			List<MerkleBlock<HasheableTransaction>> merkleBlockChain = null;
+			
+			try {
+				merkleBlockChain = getAll();
+			} catch (MismatchedInputException e) {
+		    	e.printStackTrace();
+				System.out.println("[MerkleBlockService] - Blockchain Merkle vacía");
+			}
+			
 			MerkleBlock<HasheableTransaction> newBlock;
 			
 			if(merkleBlockChain != null) {
 				MerkleBlock<?> lastBlock = merkleBlockChain.get(merkleBlockChain.size() - 1);
-				newBlock = new MerkleBlock<HasheableTransaction>(lastBlock.getHash(), pendingTransactions);
+				newBlock = new MerkleBlock<HasheableTransaction>(lastBlock.obtainHash(), pendingTransactions);
 			} else {
 				newBlock = new MerkleBlock<HasheableTransaction>(BlockRepository.GENESIS_HASH, pendingTransactions);
 				merkleBlockChain = new ArrayList<>();

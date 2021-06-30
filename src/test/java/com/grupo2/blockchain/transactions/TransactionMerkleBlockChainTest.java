@@ -30,13 +30,13 @@ public class TransactionMerkleBlockChainTest {
         transactions.add(new HasheableTransaction("Pelé", "Ronaldinho", 300D));
         transactions.add(new HasheableTransaction("Messi", "Maradona", 300D));
         transactions.add(new HasheableTransaction("Pelé", "Ronaldinho", 300D));
-        merkleBlockChain.add(new MerkleBlock<HasheableTransaction>(merkleBlockChain.get(merkleBlockChain.size() - 1).getHash(), transactions));
+        merkleBlockChain.add(new MerkleBlock<HasheableTransaction>(merkleBlockChain.get(merkleBlockChain.size() - 1).obtainHash(), transactions));
         transactions = new ArrayList<>();
         transactions.add(new HasheableTransaction("Agüero", "Pelé", 300D));
         transactions.add(new HasheableTransaction("Maradona", "Ronaldinho", 300D));
         transactions.add(new HasheableTransaction("Messi", "Maradona", 300D));
         transactions.add(new HasheableTransaction("Pelé", "Agüero", 300D));
-        merkleBlockChain.add(new MerkleBlock<HasheableTransaction>(merkleBlockChain.get(merkleBlockChain.size() - 1).getHash(), transactions));
+        merkleBlockChain.add(new MerkleBlock<HasheableTransaction>(merkleBlockChain.get(merkleBlockChain.size() - 1).obtainHash(), transactions));
     }
 
     @Test

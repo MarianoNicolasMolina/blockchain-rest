@@ -54,9 +54,17 @@ public class HasheableTransaction implements Hasheable{
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
+    
+    public void setHash(String hash) {
+    	this.hash = hash;
+    }
+    
+    public String getHash() {
+    	return hash;
+    }
 
     @Override
-    public String getHash() {
+    public String obtainHash() {
         return hash;
     }
 

@@ -70,8 +70,8 @@ public class Hasher {
             current = blockChain.get(i);
             previous = blockChain.get(i - 1);
 
-            String currHash = current.getHash();
-            String previousHash = previous.getHash();
+            String currHash = current.obtainHash();
+            String previousHash = previous.obtainHash();
 
             //Primero nos fijamos que el hash del bloque actual sea válido volviendo a hashearlo
             if(!currHash.equals(current.recalculateHash()))

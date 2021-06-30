@@ -23,7 +23,7 @@ public class MerkleBlockRepository {
         List<MerkleBlock<HasheableTransaction>> allBlocks = getAll();
 
         for(MerkleBlock<HasheableTransaction> block : allBlocks){
-            if(block.getHash().equals(hash))
+            if(block.obtainHash().equals(hash))
                 return block;
         }
 
@@ -40,7 +40,6 @@ public class MerkleBlockRepository {
 	        List<MerkleBlock<HasheableTransaction>> merkleBlockList = mapper.readValue(is,typeReference);
 	        return merkleBlockList;
 	    } catch (IOException e) {
-	    	e.printStackTrace();
 			System.out.println(LOGGER_HEADER + "La cadena merkle está vacía.");
 		}
         

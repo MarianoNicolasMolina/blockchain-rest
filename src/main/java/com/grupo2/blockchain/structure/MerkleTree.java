@@ -3,7 +3,8 @@ package com.grupo2.blockchain.structure;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MerkleTree<T extends Hasheable> implements Hasheable{
+
+public class MerkleTree<T extends Hasheable> implements Hasheable {
     public static final int TRANSACTION_LIMIT = 4;
     public static final int HASH_POSITION_A = 0;
     public static final int HASH_POSITION_B = 1;
@@ -25,7 +26,7 @@ public class MerkleTree<T extends Hasheable> implements Hasheable{
 
         //Cargamos las 4 transacciones necesarias
         for(T t : dataList)
-            tree.add(t.getHash());
+            tree.add(t.obtainHash());
 
         //Calculamos los nodos intermedios
         tree.add(Hasher.hashSHA256Hex(tree.get(HASH_POSITION_A) + tree.get(HASH_POSITION_B)));
@@ -36,7 +37,7 @@ public class MerkleTree<T extends Hasheable> implements Hasheable{
     }
 
 	@Override
-    public String getHash() {
+    public String obtainHash() {
         return tree.get(HASH_POSITION_ABCD);
     }
 
@@ -69,4 +70,16 @@ public class MerkleTree<T extends Hasheable> implements Hasheable{
     public List<T> getDataList() {
         return dataList;
     }
+
+	public List<String> getTree() {
+		return tree;
+	}
+
+	public void setTree(List<String> tree) {
+		this.tree = tree;
+	}
+
+	public void setDataList(List<T> dataList) {
+		this.dataList = dataList;
+	}
 }

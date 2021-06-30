@@ -15,8 +15,8 @@ public class MerkleBlock<T extends Hasheable> implements Hasheable {
     }
 
     @Override
-    public String getHash() {
-        return merkleTree.getHash();
+    public String obtainHash() {
+        return merkleTree.obtainHash();
     }
 
     @Override
@@ -35,4 +35,8 @@ public class MerkleBlock<T extends Hasheable> implements Hasheable {
     public MerkleTree<T> getMerkleTree() {
         return merkleTree;
     }
+
+	public void setMerkleTree(MerkleTree<T> merkleTree) {
+		this.merkleTree = merkleTree;
+	}
 }
