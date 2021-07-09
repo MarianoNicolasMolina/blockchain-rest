@@ -28,7 +28,7 @@ public class BlockService<T> implements IBlockService<T> {
 	public void save(Block<T> block) throws IOException {
 		List<Block<?>> blockChain = getAll();
 		
-		if(blockChain != null) {
+		if(blockChain.size() > 0) {
 			Block<?> lastBlock = blockChain.get(blockChain.size() - 1);
 			block.setPrevHash(lastBlock.getHash());
 		} else {

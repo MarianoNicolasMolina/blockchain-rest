@@ -2,7 +2,6 @@ package com.grupo2.blockchain.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,10 +35,11 @@ public class BlockController {
 	}
 	
 	@PostMapping("/transaction")
-	public void save(@RequestBody Transaction t) throws IOException {
-		
-		Block<Transaction> block = new Block<Transaction>();
+	public ResponseEntity<Block> save(@RequestBody Transaction t) throws IOException {
+		Block<Transaction> block = new Block<>();
 		block.setData(t);
 		blockService.save(block);
+
+		return ResponseEntity.ok(block);
 	}
 }
