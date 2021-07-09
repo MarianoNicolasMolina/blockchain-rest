@@ -11,6 +11,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MerkleBlockRepository {
@@ -34,16 +35,16 @@ public class MerkleBlockRepository {
         FileUtils.checkFile(FILENAME);
         ObjectMapper mapper = new ObjectMapper();
         TypeReference<List<MerkleBlock<HasheableTransaction>>> typeReference = new TypeReference<List<MerkleBlock<HasheableTransaction>>>() {};
-
+        List<MerkleBlock<HasheableTransaction>> merkleBlockList = new ArrayList<>();
         try {
 	        InputStream is = new FileInputStream(FileUtils.getFile(FILENAME));
-	        List<MerkleBlock<HasheableTransaction>> merkleBlockList = mapper.readValue(is,typeReference);
-	        return merkleBlockList;
+	        merkleBlockList = mapper.readValue(is,typeReference);
+
 	    } catch (IOException e) {
-			System.out.println(LOGGER_HEADER + "La cadena merkle está vacía.");
+			System.out.println(LOGGER_HEADER + "La cadena merkle esta vacia.");
 		}
         
-        return null;
+        return merkleBlockList;
     }
 
     public static void save(List<MerkleBlock<HasheableTransaction>> blockChain) throws IOException {

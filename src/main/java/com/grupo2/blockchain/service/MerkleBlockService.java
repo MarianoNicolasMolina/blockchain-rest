@@ -40,7 +40,7 @@ public class MerkleBlockService implements IMerkleBlockService {
     @Override
 	public void save(HasheableTransaction transaction) throws IOException {
     	
-    	//Calculamos el hash de la transacción
+    	//Calculamos el hash de la transacciï¿½n
     	transaction.recalculateTimeStampAndHash();
     	
     	//Obtenemos las transacciones pendientes
@@ -60,7 +60,7 @@ public class MerkleBlockService implements IMerkleBlockService {
 				merkleBlockChain = getAll();
 			} catch (MismatchedInputException e) {
 		    	e.printStackTrace();
-				System.out.println("[MerkleBlockService] - Blockchain Merkle vacía");
+				System.out.println("[MerkleBlockService] - Blockchain Merkle vacia");
 			}
 			
 			MerkleBlock<HasheableTransaction> newBlock;

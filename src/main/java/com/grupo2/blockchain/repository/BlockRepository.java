@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -31,16 +32,16 @@ public class BlockRepository<T> {
 		FileUtils.checkFile(FILENAME);
 		ObjectMapper mapper = new ObjectMapper();
 		TypeReference<List<Block<?>>> typeReference = new TypeReference<List<Block<?>>>(){};
-		
+		List<Block<?>> b = new ArrayList<>();
 		try {
 			InputStream is = new FileInputStream(FileUtils.getFile(FILENAME));
-			List<Block<?>> b = mapper.readValue(is,typeReference);
-			return b;
+			b = mapper.readValue(is,typeReference);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 
-		return null;
+		return b;
+
 	}
 
 	public static void save(List<Block<?>> blockChain) throws UnsupportedEncodingException {
