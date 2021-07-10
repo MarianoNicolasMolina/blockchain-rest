@@ -38,4 +38,10 @@ public class BlockController {
 
 		return ResponseEntity.ok(block);
 	}
+	
+	@DeleteMapping
+	public ResponseEntity deleteAll() throws IOException {
+		blockService.deleteAll();
+		return ResponseEntity.ok(null);
+	}
 }

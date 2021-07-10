@@ -57,4 +57,20 @@ public class BlockRepository<T> {
 			e.printStackTrace();
 		}
 	}
+
+	public static void deleteAll() throws UnsupportedEncodingException {
+		FileUtils.checkFile(FILENAME);
+		ObjectMapper mapper = new ObjectMapper();
+		BufferedWriter out;
+		
+		try {
+			List<Block<?>> b = getAll();
+			b.clear();
+			out = new BufferedWriter(FileUtils.getFileWriter(FILENAME));
+			mapper.writeValue(out, b);
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

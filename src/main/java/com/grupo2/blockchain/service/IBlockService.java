@@ -11,5 +11,5 @@ public interface IBlockService<T> {
 	List<Block<?>> getAll() throws IOException;
 	Block<?> getByHash(String hash) throws UnsupportedEncodingException;
 	void save(Block<T> block) throws IOException;
-	Integer getNewId();
+	void deleteAll() throws IOException;
 }

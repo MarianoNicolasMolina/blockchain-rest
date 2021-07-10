@@ -43,9 +43,7 @@ public class BlockService<T> implements IBlockService<T> {
 	}
 
 	@Override
-	public Integer getNewId() {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteAll() throws IOException {
+		BlockRepository.deleteAll();
 	}
-
 }
