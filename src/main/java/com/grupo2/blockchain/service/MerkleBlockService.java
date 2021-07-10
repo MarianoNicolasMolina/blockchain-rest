@@ -85,4 +85,9 @@ public class MerkleBlockService implements IMerkleBlockService {
 		
 		MerkleBlockRepository.savePendingTransactions(pendingTransactions);
 	}
+
+    @Override
+	public void deleteAll() throws IOException {
+    	MerkleBlockRepository.deleteAll();
+	}
 }

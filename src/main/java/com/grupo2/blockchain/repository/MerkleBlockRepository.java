@@ -2,6 +2,7 @@ package com.grupo2.blockchain.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.grupo2.blockchain.structure.Block;
 import com.grupo2.blockchain.structure.MerkleBlock;
 import com.grupo2.blockchain.transactions.HasheableTransaction;
 import com.grupo2.blockchain.utils.FileUtils;
@@ -11,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +83,28 @@ public class MerkleBlockRepository {
         out = new BufferedWriter(FileUtils.getFileWriter(PENDING_TRANSACTIONS_FILENAME));
         mapper.writeValue(out, pendingTransactions);
         out.close();
+	}
+
+	public static void deleteAll() throws UnsupportedEncodingException {
+		FileUtils.checkFile(PENDING_TRANSACTIONS_FILENAME);
+		FileUtils.checkFile(FILENAME);
+		ObjectMapper mapper = new ObjectMapper();
+		BufferedWriter out;
+		
+		try {
+			List<MerkleBlock<HasheableTransaction>> b = getAll();
+			b.clear();
+			out = new BufferedWriter(FileUtils.getFileWriter(FILENAME));
+			mapper.writeValue(out, b);
+			out.close();
+			List<HasheableTransaction> pendT = getPendingTransactions();
+			pendT.clear();
+			out = new BufferedWriter(FileUtils.getFileWriter(PENDING_TRANSACTIONS_FILENAME));
+			mapper.writeValue(out, pendT);
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

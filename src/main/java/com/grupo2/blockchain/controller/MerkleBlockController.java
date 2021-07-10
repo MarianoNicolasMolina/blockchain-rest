@@ -46,7 +46,10 @@ public class MerkleBlockController {
     	merkleBlockService.save(transaction);
         return new ResponseEntity(merkleBlockService.getPendingTransactions(),HttpStatus.OK);
     }
-
-
-
+	
+	@DeleteMapping
+	public ResponseEntity deleteAll() throws IOException {
+		merkleBlockService.deleteAll();
+		return ResponseEntity.ok(null);
+	}
 }

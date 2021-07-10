@@ -12,5 +12,5 @@ public interface IMerkleBlockService {
     void save(MerkleBlock<HasheableTransaction> block) throws IOException;
 	void save(HasheableTransaction transaction) throws IOException;
 	List<HasheableTransaction> getPendingTransactions() throws IOException;
-
+	void deleteAll() throws IOException;
 }
