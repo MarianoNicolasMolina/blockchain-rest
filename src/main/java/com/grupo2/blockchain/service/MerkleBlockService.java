@@ -65,7 +65,7 @@ public class MerkleBlockService implements IMerkleBlockService {
 			
 			MerkleBlock<HasheableTransaction> newBlock;
 			
-			if(merkleBlockChain != null) {
+			if(merkleBlockChain.size() > 0) {
 				MerkleBlock<?> lastBlock = merkleBlockChain.get(merkleBlockChain.size() - 1);
 				newBlock = new MerkleBlock<HasheableTransaction>(lastBlock.obtainHash(), pendingTransactions);
 			} else {

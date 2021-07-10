@@ -6,12 +6,7 @@ import java.io.UnsupportedEncodingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.grupo2.blockchain.service.IBlockService;
 import com.grupo2.blockchain.structure.Block;
@@ -19,11 +14,12 @@ import com.grupo2.blockchain.transactions.Transaction;
 
 @RestController
 @RequestMapping("/blocks")
+@CrossOrigin(origins = "http://localhost:3000")
 public class BlockController {
 
 	@Autowired
 	private IBlockService<Transaction> blockService;
-	
+
 	@GetMapping("{hash}")
 	public ResponseEntity get(@PathVariable("hash") String hash) throws UnsupportedEncodingException {
 		return new ResponseEntity(blockService.getByHash(hash), HttpStatus.OK);
