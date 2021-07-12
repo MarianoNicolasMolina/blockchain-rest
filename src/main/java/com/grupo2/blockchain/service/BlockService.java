@@ -25,7 +25,7 @@ public class BlockService<T> implements IBlockService<T> {
 	}
 
 	@Override
-	public void save(Block<T> block) throws IOException {
+	public boolean save(Block<T> block) throws IOException {
 		List<Block<?>> blockChain = getAll();
 		
 		if(blockChain.size() > 0) {
@@ -39,7 +39,9 @@ public class BlockService<T> implements IBlockService<T> {
 		if(Hasher.isValidChain(blockChain)) {
 			blockChain.add(block);
 			BlockRepository.save(blockChain);
-		}
+			return true;
+		} else
+			return false;
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public class MerkleBlockService implements IMerkleBlockService {
     }
 
     @Override
-	public void save(HasheableTransaction transaction) throws IOException {
+	public boolean save(HasheableTransaction transaction) throws IOException {
     	
     	//Calculamos el hash de la transacci�n
     	transaction.recalculateTimeStampAndHash();
@@ -80,10 +80,12 @@ public class MerkleBlockService implements IMerkleBlockService {
 				
 				//Limpiamos las transacciones pendientes, ya que se agregaron a la cadena
 				pendingTransactions.clear();
-			}
+			} else
+				return false;
 		}
 		
 		MerkleBlockRepository.savePendingTransactions(pendingTransactions);
+		return true;
 	}
 
     @Override

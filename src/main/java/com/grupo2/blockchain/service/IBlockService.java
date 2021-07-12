@@ -10,6 +10,6 @@ public interface IBlockService<T> {
 
 	List<Block<?>> getAll() throws IOException;
 	Block<?> getByHash(String hash) throws UnsupportedEncodingException;
-	void save(Block<T> block) throws IOException;
+	boolean save(Block<T> block) throws IOException;
 	void deleteAll() throws IOException;
 }

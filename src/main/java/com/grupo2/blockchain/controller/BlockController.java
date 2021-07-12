@@ -31,12 +31,13 @@ public class BlockController {
 	}
 	
 	@PostMapping("/transaction")
-	public ResponseEntity<Block> save(@RequestBody Transaction t) throws IOException {
+	public ResponseEntity save(@RequestBody Transaction t) throws IOException {
 		Block<Transaction> block = new Block<>();
 		block.setData(t);
-		blockService.save(block);
-
-		return ResponseEntity.ok(block);
+		if(blockService.save(block))
+			return new ResponseEntity<>(block, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
 	@DeleteMapping

@@ -43,8 +43,10 @@ public class MerkleBlockController {
     @PostMapping("/transaction")
     public ResponseEntity createTransaction(@RequestBody HasheableTransaction transaction) throws IOException{
 
-    	merkleBlockService.save(transaction);
-        return new ResponseEntity(merkleBlockService.getPendingTransactions(),HttpStatus.OK);
+    	if(merkleBlockService.save(transaction))
+            return new ResponseEntity(merkleBlockService.getPendingTransactions(),HttpStatus.OK);
+    	else
+    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 	
 	@DeleteMapping
